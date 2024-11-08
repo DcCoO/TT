@@ -20,6 +20,10 @@ public class MainMenuView : View<MainMenuView>
     public GameObject m_PointsPerRank;
     public RankingView m_RankingView;
 
+    [SerializeField] private Feature m_SkinSelectFeature;
+    [SerializeField] private GameObject m_SkinSelectPanel;
+    [SerializeField] private GameObject m_SkinSelectPanelNew;
+
     [Header("Ranks")]
     public string[] m_Ratings;
 
@@ -31,6 +35,27 @@ public class MainMenuView : View<MainMenuView>
 
         m_StatsManager = StatsManager.Instance;
         m_IdSkin = m_StatsManager.FavoriteSkin;
+
+        OnFeatureStateChanged(m_SkinSelectFeature.FeatureType, m_SkinSelectFeature);
+    }
+
+    private void Start()
+    {
+        FeatureManager.OnChangeFeatureState += OnFeatureStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        FeatureManager.OnChangeFeatureState -= OnFeatureStateChanged;
+    }
+
+    private void OnFeatureStateChanged(EFeatureType featureType, bool state)
+    {
+        if (featureType == m_SkinSelectFeature.FeatureType)
+        {
+            m_SkinSelectPanelNew.SetActive(state);
+            m_SkinSelectPanel.SetActive(!state);
+        }
     }
 
     public void OnPlayButton()
