@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a14cbe6676327fa458f724e3fcce5b02, type: 3}
-  m_Name: Feature Settings
+  m_Script: {fileID: 11500000, guid: 1e5fe2e3f1f75614dbb8f4ccabcacfac, type: 3}
+  m_Name: Daily Rewards Feature
   m_EditorClassIdentifier: 
-  CollisionsEnabled: 0
-  SkinSelectEnabled: 0
+  FeatureType: 2
+  IsEnabled: 0

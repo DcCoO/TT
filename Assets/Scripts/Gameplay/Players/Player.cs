@@ -67,9 +67,10 @@ public abstract class Player : MappedObject, IDrawLine
     protected int               m_Level;
 	private float 				m_Percent;
 	public float 				percent { get { return m_Percent; } }
+    protected Rigidbody			m_Rigidbody;
 
-	// Bonuses
-	private float				m_BonusStartTime;
+    // Bonuses
+    private float				m_BonusStartTime;
 	private float 				m_BonusDuration;
 	private float				m_DeathStartTime;
     private float               m_RespawnStartTime;
@@ -107,7 +108,7 @@ public abstract class Player : MappedObject, IDrawLine
 	public virtual void Init (string _Name, BrushData _Brush, Color _Color)
 	{
         m_SizeSecondaryBrush = Constants.c_SizeSecondaryMultipler;
-
+		print("AAAAAAAAAAAAAAAA");
         // Cache
 		m_GameManager = GameManager.Instance;
 		m_Transform = transform;
@@ -121,9 +122,10 @@ public abstract class Player : MappedObject, IDrawLine
 
 		// Buffers
 		m_SearchBuffer = new List<GameObject> ();
+        m_Rigidbody = GetComponent<Rigidbody>();
 
-		// Runtime
-		GameObject brushObject = Instantiate (_Brush.m_Prefab, m_Transform) as GameObject;
+        // Runtime
+        GameObject brushObject = Instantiate (_Brush.m_Prefab, m_Transform) as GameObject;
 		m_Brush = brushObject.GetComponent<Brush> ();
 
         m_DrawLines[0].Init(this, m_Brush);

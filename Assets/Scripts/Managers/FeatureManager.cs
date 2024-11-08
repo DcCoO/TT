@@ -1,18 +1,36 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FeatureManager : MonoBehaviour
+public class FeatureManager : SingletonMB<FeatureManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    public static event Action<EFeatureType, bool> OnChangeFeatureState;
+
+    [SerializeField] private Feature[] _features;
+    private Dictionary<EFeatureType, Feature> _featuresMap;
+
+    private void Awake()
     {
-        
+        _featuresMap = new Dictionary<EFeatureType, Feature>();
+
+        foreach (Feature feature in _features)
+        {
+            _featuresMap.Add(feature.FeatureType, feature);
+        }
+    } 
+
+    public void SetFeatureState(EFeatureType featureType, bool state)
+    {
+        if (_featuresMap.TryGetValue(featureType, out Feature feature))
+        {
+            feature.IsEnabled = state;
+            OnChangeFeatureState?.Invoke(featureType, state);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetFeatures(Feature[] features)
     {
-        
+        _features = features;
     }
+
 }

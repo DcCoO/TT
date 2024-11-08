@@ -49,7 +49,7 @@ public class MainCamera : SingletonMB<MainCamera>
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         GamePhase phase = m_GameManager.currentPhase;
         switch (phase)

@@ -1,0 +1,4 @@
+﻿public enum EFeatureType 
+{
+    COLLISIONS, SKIN_SELECT, DAILY_REWARDS, CUSTOM_FEATURE
+}
