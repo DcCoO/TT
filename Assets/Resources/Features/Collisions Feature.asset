@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Collisions Feature
   m_EditorClassIdentifier: 
   FeatureType: 0
-  IsEnabled: 0
+  IsEnabled: 1
