@@ -9,6 +9,7 @@ public class MainCamera : SingletonMB<MainCamera>
     public Transform m_BasePos;
     public Transform m_EndPos;
     public Vector3 m_Offset;
+    [SerializeField] private Feature m_useCollisions;
 
 
     // Cache
@@ -49,7 +50,19 @@ public class MainCamera : SingletonMB<MainCamera>
         }
     }
 
-    void FixedUpdate()
+    private void Update()
+    {
+        if (m_useCollisions) return;
+        MixedUpdate();
+    }
+
+    private void FixedUpdate()
+    {
+        if (!m_useCollisions) return;
+        MixedUpdate();
+    }
+
+    private void MixedUpdate()
     {
         GamePhase phase = m_GameManager.currentPhase;
         switch (phase)

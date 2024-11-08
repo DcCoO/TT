@@ -5,4 +5,9 @@ public class Feature : ScriptableObject
 {
     public EFeatureType FeatureType;
     public bool IsEnabled;
+
+    public static implicit operator bool(Feature feature)
+    {
+        return feature.IsEnabled;
+    }
 }

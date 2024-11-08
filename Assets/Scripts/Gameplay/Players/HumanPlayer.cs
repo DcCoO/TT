@@ -32,37 +32,56 @@ public class HumanPlayer : Player, IDirectionController
 
 		// Buffers
 		m_IsMoving = false;
-	}
+    }
 
-	protected override void Update()
+    protected override void Update()
+    {
+        base.Update();
+        if (m_useCollisions) return;
+        MixedUpdate(false);
+    }
+
+    private void FixedUpdate()
+    {
+        if (!m_useCollisions) return;
+        MixedUpdate(true);
+    }
+
+    private void MixedUpdate(bool useCollisions)
 	{
-		base.Update();
-
         if (!m_GameManager.m_IsPlaying)
             return;
 
         m_Direction = m_Input;
+        m_Rigidbody.velocity = Vector3.zero;
+
         if (m_IsMoving && m_Input.sqrMagnitude > Mathf.Epsilon)
-            m_Transform.rotation = Quaternion.LookRotation(m_Input);
+        {
+            if (useCollisions) m_Rigidbody.rotation = Quaternion.LookRotation(m_Input);
+            else m_Transform.rotation = Quaternion.LookRotation(m_Input);
+        }
 
         m_Direction = m_Transform.forward * m_Input.magnitude;
 
         Vector3 endPos = m_Transform.position + m_Direction * Time.deltaTime;
         ClampPosition(ref endPos);
-        m_Transform.position = endPos;
+        
+        if (useCollisions) m_Rigidbody.MovePosition(endPos);
+        else m_Transform.position = endPos;
+        
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.A))
-		{
-			AddBrush();
-		}
+        {
+            AddBrush();
+        }
         if (Input.GetKeyDown(KeyCode.E))
-		{
-			LevelUp();
-		}
+        {
+            LevelUp();
+        }
 #endif
-	}
+    }
 
-	protected override void LateUpdate ()
+    protected override void LateUpdate ()
 	{
 		base.LateUpdate ();
 
@@ -115,7 +134,7 @@ public class HumanPlayer : Player, IDirectionController
 
 	public void OnMove(Vector3 _Offset)
 	{
-        if (m_IsEliminated)
+        if (m_IsEliminated || m_GameManager.currentPhase == GamePhase.PRE_END)
             return;
 		if (m_IsMoving == false)
 			OnStartMove();
@@ -133,6 +152,14 @@ public class HumanPlayer : Player, IDirectionController
 		m_Input = Vector3.zero;
 		ChangeMoveStatus(false);
 	}
+
+    protected override void OnChangeGamePhase(GamePhase phase)
+    {
+        base.OnChangeGamePhase(phase);
+        if (phase != GamePhase.PRE_END) return;
+        m_Input = Vector3.zero;
+        m_IsMoving = false;
+    }
 
 	public override void LevelUp ()
 	{

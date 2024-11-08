@@ -190,10 +190,21 @@ public class IAPlayer : Player
         ShowVisual();
     }
 
-    protected override void Update()
-	{
-        base.Update();
+    private void FixedUpdate()
+	{ 
+		if (!m_useCollisions) return;
+        MixedUpdate(true);
+    }
 
+    protected override void Update()
+    {
+        base.Update();
+        if (m_useCollisions) return;
+        MixedUpdate(false);
+    }
+
+    private void MixedUpdate(bool useCollisions)
+	{
         if (BattleRoyaleManager.Instance.m_IsPlaying == false)
             return;
 
@@ -203,29 +214,30 @@ public class IAPlayer : Player
             m_Transform.position += m_DeathDirection * Time.deltaTime;
             return;
         }
-        
-        switch (m_Behaviour)
-		{
-		case IABehaviour.FOLLOWING_TRANSFORM:
-			if (m_Target != null)
-				m_Destination = m_Target.position;
-			else
-				Check ();
-            break;
 
-        case IABehaviour.ESCAPING_TRANSFORM:
-            if (m_Target != null)
-                m_Destination = -m_Target.position;
-            else
-				Check ();
-            break;
+        switch (m_Behaviour)
+        {
+            case IABehaviour.FOLLOWING_TRANSFORM:
+                if (m_Target != null)
+                    m_Destination = m_Target.position;
+                else
+                    Check();
+                break;
+
+            case IABehaviour.ESCAPING_TRANSFORM:
+                if (m_Target != null)
+                    m_Destination = -m_Target.position;
+                else
+                    Check();
+                break;
         }
 
-		if (Move() || Time.time - m_LastCheckTime > m_CheckRate)
-			Check ();
-	}
+        if (Move(useCollisions) || Time.time - m_LastCheckTime > m_CheckRate)
+            Check();
+    }
 
-    private bool Move()
+
+    private bool Move(bool useCollisions)
     {
         float lerpFactor = CloseToEdges() ? c_FastLerpFactor : m_LerpFactor;
 
@@ -238,9 +250,17 @@ public class IAPlayer : Player
 		Vector3 pos = m_Transform.position;
 		pos += m_Direction * Time.deltaTime;
 		ClampPosition(ref pos);
-		m_Transform.position = pos;
 
-		m_Transform.rotation = Quaternion.LookRotation (m_Forward);
+		if (useCollisions)
+		{
+            m_Rigidbody.MovePosition(pos);
+            m_Rigidbody.rotation = Quaternion.LookRotation(m_Forward);
+        }
+		else
+		{
+            m_Transform.position = pos;
+            m_Transform.rotation = Quaternion.LookRotation(m_Forward);
+		}
 
         if (diff.sqrMagnitude < c_SqrToleranceDistance)
             return true;

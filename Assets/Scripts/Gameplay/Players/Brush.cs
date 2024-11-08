@@ -37,12 +37,12 @@ public class Brush : MonoBehaviour
 	{
 		// Cache
 		m_Transform = transform;
-		m_Rigidbody = GetComponent<Rigidbody> ();
+		//m_Rigidbody = GetComponent<Rigidbody> ();
 
         m_ModelGO = m_ModelTr.gameObject;
         m_MovingEffectGO = m_MovingEffect.gameObject;
 
-		m_Rigidbody.isKinematic = true;
+		//m_Rigidbody.isKinematic = true;
 	}
 
     public void Init(Player _Player, EBrushType _Type)
@@ -74,7 +74,8 @@ public class Brush : MonoBehaviour
 
 	public void Fall (bool _Fall)
 	{
-		m_Rigidbody.isKinematic = !_Fall;
+		m_Rigidbody = gameObject.AddComponent<Rigidbody>();
+        m_Rigidbody.isKinematic = !_Fall;
 
 		if (_Fall)
 			m_Rigidbody.angularVelocity = Vector3.one * 2.0f;

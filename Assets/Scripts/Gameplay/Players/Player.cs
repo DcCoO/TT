@@ -89,6 +89,9 @@ public abstract class Player : MappedObject, IDrawLine
 	public BrushData            m_BrushData;
 	private readonly Vector3    c_HerdOffset = new Vector3(0.86f, 0f, -0.54f);
 
+	// Features
+	[SerializeField] protected Feature m_useCollisions;
+
     protected float m_DeadTime
     {
         get
@@ -108,7 +111,7 @@ public abstract class Player : MappedObject, IDrawLine
 	public virtual void Init (string _Name, BrushData _Brush, Color _Color)
 	{
         m_SizeSecondaryBrush = Constants.c_SizeSecondaryMultipler;
-		print("AAAAAAAAAAAAAAAA");
+
         // Cache
 		m_GameManager = GameManager.Instance;
 		m_Transform = transform;
@@ -141,7 +144,8 @@ public abstract class Player : MappedObject, IDrawLine
 		RegisterMap ();
         
 		m_GameManager.onEndGame += OnEndGame;
-	}
+        m_GameManager.onGamePhaseChanged += OnChangeGamePhase;
+    }
 
 	void OnEndGame()
 	{
@@ -151,7 +155,8 @@ public abstract class Player : MappedObject, IDrawLine
 	void OnDestroy()
 	{
 		m_GameManager.onEndGame -= OnEndGame;
-	}
+        m_GameManager.onGamePhaseChanged -= OnChangeGamePhase;
+    }
 
     protected void ChangeMoveStatus(bool _Moving)
 	{
@@ -207,6 +212,11 @@ public abstract class Player : MappedObject, IDrawLine
 		ComputeCollisions ();
 		UpdateMap ();
 	}
+
+	protected virtual void OnChangeGamePhase(GamePhase phase)
+	{
+		if (phase == GamePhase.PRE_END) onMoveStatusChanged.Invoke(false);
+    }
 
 	void UpdateFollowingBrushes()
 	{
