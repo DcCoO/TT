@@ -53,7 +53,7 @@ public class HumanPlayer : Player, IDirectionController
             return;
 
         m_Direction = m_Input;
-        m_Rigidbody.velocity = Vector3.zero;
+        if (useCollisions) m_Rigidbody.velocity = Vector3.zero;
 
         if (m_IsMoving && m_Input.sqrMagnitude > Mathf.Epsilon)
         {

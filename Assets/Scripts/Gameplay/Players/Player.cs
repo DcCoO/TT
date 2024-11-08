@@ -126,6 +126,7 @@ public abstract class Player : MappedObject, IDrawLine
 		// Buffers
 		m_SearchBuffer = new List<GameObject> ();
         m_Rigidbody = GetComponent<Rigidbody>();
+		m_Rigidbody.isKinematic = !m_useCollisions;
 
         // Runtime
         GameObject brushObject = Instantiate (_Brush.m_Prefab, m_Transform) as GameObject;
