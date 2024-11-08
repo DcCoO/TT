@@ -19,6 +19,11 @@ public class FeatureManager : SingletonMB<FeatureManager>
         }
     } 
 
+    public bool GetFeatureState(EFeatureType featureType)
+    {
+        return m_featuresMap.TryGetValue(featureType, out Feature feature) ? feature : false;
+    }
+
     public void SetFeatureState(EFeatureType featureType, bool state)
     {
         if (m_featuresMap.TryGetValue(featureType, out Feature feature))

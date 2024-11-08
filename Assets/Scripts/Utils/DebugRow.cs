@@ -6,20 +6,20 @@ public class DebugRow : MonoBehaviour
     [SerializeField] private Text m_Title;
     [SerializeField] private Toggle m_Toggle;
 
-    private Feature m_Feature;
+    private EFeatureType m_FeatureType;
 
-    public void Setup(Feature feature)
+    public void Setup(EFeatureType featureType)
     {
-        m_Feature = feature;
-        m_Title.text = feature.name;
-        m_Toggle.isOn = feature;
+        m_FeatureType = featureType;
+        m_Title.text = featureType.ToString();
+        m_Toggle.isOn = FeatureManager.Instance.GetFeatureState(featureType);
 
         m_Toggle.onValueChanged.AddListener(OnValueChanged);
     }
 
     private void OnValueChanged(bool value)
     {
-        FeatureManager.Instance.SetFeatureState(m_Feature.FeatureType, value);
+        FeatureManager.Instance.SetFeatureState(m_FeatureType, value);
     }
 
     private void OnDestroy()
