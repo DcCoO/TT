@@ -19,7 +19,7 @@ public class DebugRow : MonoBehaviour
 
     private void OnValueChanged(bool value)
     {
-        m_Feature.IsEnabled = value;
+        FeatureManager.Instance.SetFeatureState(m_Feature.FeatureType, value);
     }
 
     private void OnDestroy()

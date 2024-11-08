@@ -6,22 +6,22 @@ public class FeatureManager : SingletonMB<FeatureManager>
 {
     public static event Action<EFeatureType, bool> OnChangeFeatureState;
 
-    [SerializeField] private Feature[] _features;
-    private Dictionary<EFeatureType, Feature> _featuresMap;
+    [SerializeField] private Feature[] m_features;
+    private Dictionary<EFeatureType, Feature> m_featuresMap;
 
     private void Awake()
     {
-        _featuresMap = new Dictionary<EFeatureType, Feature>();
+        m_featuresMap = new Dictionary<EFeatureType, Feature>();
 
-        foreach (Feature feature in _features)
+        foreach (Feature feature in m_features)
         {
-            _featuresMap.Add(feature.FeatureType, feature);
+            m_featuresMap.Add(feature.FeatureType, feature);
         }
     } 
 
     public void SetFeatureState(EFeatureType featureType, bool state)
     {
-        if (_featuresMap.TryGetValue(featureType, out Feature feature))
+        if (m_featuresMap.TryGetValue(featureType, out Feature feature))
         {
             feature.IsEnabled = state;
             OnChangeFeatureState?.Invoke(featureType, state);
@@ -30,7 +30,7 @@ public class FeatureManager : SingletonMB<FeatureManager>
 
     public void SetFeatures(Feature[] features)
     {
-        _features = features;
+        m_features = features;
     }
 
 }
