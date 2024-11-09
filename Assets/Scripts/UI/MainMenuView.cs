@@ -53,8 +53,9 @@ public class MainMenuView : View<MainMenuView>
     {
         if (featureType == m_SkinSelectFeature.FeatureType)
         {
-            m_SkinSelectPanelNew.SetActive(state);
-            m_SkinSelectPanel.SetActive(!state);
+            print("TODO: FIX THIS");
+            //m_SkinSelectPanelNew.SetActive(state);
+            //m_SkinSelectPanel.SetActive(!state);
         }
     }
 
