@@ -9,8 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e5fe2e3f1f75614dbb8f4ccabcacfac, type: 3}
+  m_Script: {fileID: 11500000, guid: f411ccad4fc1ca3448b7e4f025732b93, type: 3}
   m_Name: Daily Rewards Feature
   m_EditorClassIdentifier: 
   FeatureType: 2
   IsEnabled: 0
+  _dailyRewards:
+  - Value: 100
+  - Value: 100
+  - Value: 150
+  - Value: 150
+  - Value: 200
+  - Value: 300
+  - Value: 300

@@ -419,6 +419,7 @@ Transform:
   - {fileID: 4503442229141700}
   - {fileID: 4049956935751856}
   - {fileID: 2411997489443503955}
+  - {fileID: 2322623790622708683}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -685,6 +686,49 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &6551862725047867539
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2322623790622708683}
+  - component: {fileID: 2270452367939226181}
+  m_Layer: 0
+  m_Name: CoinsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2322623790622708683
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6551862725047867539}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4066945081007750}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2270452367939226181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6551862725047867539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa448cacf2f263848b3c88154ca7e4f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8571481934338926677
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,6 +739,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2411997489443503955}
   - component: {fileID: 7977004960318768189}
+  - component: {fileID: 5312532085599159840}
   m_Layer: 0
   m_Name: FeatureManager
   m_TagString: Untagged
@@ -728,4 +773,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a70534366372b714f806fc51b1cde4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _features: []
+  m_features:
+  - {fileID: 11400000, guid: d65c37d01f995564b8e5135748d00955, type: 2}
+  - {fileID: 11400000, guid: 71c9b0204197b4448a9271aa13e2c928, type: 2}
+  - {fileID: 11400000, guid: d96f8a19f246c914aa532e71e685997a, type: 2}
+  - {fileID: 11400000, guid: a4b0ea6d7e924af458df7b7c83c0f1a8, type: 2}
+--- !u!114 &5312532085599159840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8571481934338926677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0952bfc32af04e548a93d38ff7421069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
