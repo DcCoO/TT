@@ -50,6 +50,7 @@ public class GameManager : SingletonMB<GameManager>
     public bool m_AlreadyRevive = false;
 
     // Cache
+    [SerializeField] private Feature m_SkinSelectFeature;
     private StatsManager m_StatsManager;
     private ProgressionView m_ProgressionView;
     private MainMenuView m_MainMenuView;
@@ -77,6 +78,8 @@ public class GameManager : SingletonMB<GameManager>
     private PlayerNameData m_PlayerNameData;
     private List<GameObject> m_Objects; // Powerups and other map objects
     private List<Player> m_OrderedPlayers;
+
+    [HideInInspector] public SkinData m_SkinFromSkinSelect;
 
     void Awake()
     {
@@ -289,7 +292,20 @@ public class GameManager : SingletonMB<GameManager>
 
         int brushIndex = ComputeCurrentPlayeBrushIndex(_Human, _Index);
         int colorIndex = ComputeCurrentPlayerColor(_Human, _Index);
-        player.Init(m_PlayerNameData.PickName(), m_Brushs[brushIndex], m_Colors[colorIndex]);
+
+        if (_Human && m_SkinSelectFeature && m_SkinFromSkinSelect != null)
+        {
+            if (m_SkinFromSkinSelect != null)
+            {
+                player.Init(m_PlayerNameData.PickName(), m_SkinFromSkinSelect.Brush, m_SkinFromSkinSelect.Color.m_Colors[0]);
+            }
+            else
+                player.Init(m_PlayerNameData.PickName(), m_SkinFromSkinSelect.Brush, m_SkinFromSkinSelect.Color.m_Colors[0]);
+        }
+        else
+        {
+            player.Init(m_PlayerNameData.PickName(), m_Brushs[brushIndex], m_Colors[colorIndex]);
+        }
 
         if (_Human)
         {

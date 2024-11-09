@@ -197,9 +197,12 @@ MonoBehaviour:
   m_Players: []
   m_XPByRank: 640000004b000000320000002300000019000000140000000f0000000a0000000500000001000000
   m_AlreadyRevive: 0
+  m_SkinSelectFeature: {fileID: 11400000, guid: a4b0ea6d7e924af458df7b7c83c0f1a8,
+    type: 2}
   m_IsPlaying: 0
   m_Brushs: []
   m_Skins: []
+  m_SkinFromSkinSelect: {fileID: 0}
 --- !u!1 &1495951989702896
 GameObject:
   m_ObjectHideFlags: 0

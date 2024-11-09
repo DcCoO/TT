@@ -8,6 +8,9 @@ public class SkinOption : MonoBehaviour
     private SkinSelectView m_SkinSelectView;
     private Vector2Int m_SkinIndex;
 
+    private float m_LastClickTime = 0;
+    private readonly float m_ClickMaxDuration = 0.2f;
+
     public void Setup(SkinData skinData, SkinSelectView skinSelectView, Vector2Int skinIndex)
     {
         m_SkinData = skinData;
@@ -19,7 +22,14 @@ public class SkinOption : MonoBehaviour
 
     public void OnMouseDown()
     {
-        print("AAAAAAAAAA");
-        m_SkinSelectView.LoadPreview(m_SkinIndex);
+        m_LastClickTime = Time.time;
+    }
+
+    public void OnMouseUp()
+    {
+        if (Time.time - m_LastClickTime < m_ClickMaxDuration)
+        {
+            m_SkinSelectView.LoadPreview(m_SkinIndex);
+        }
     }
 }

@@ -99,6 +99,7 @@ public class SkinSelectView : MonoBehaviour
     {
         m_CurrentSkinIndex = skinIndex;
         m_PreviewBrush.Set(m_Skins[m_CurrentSkinIndex.x][m_CurrentSkinIndex.y]);
+        GameManager.Instance.m_SkinFromSkinSelect = m_Skins[m_CurrentSkinIndex.x][m_CurrentSkinIndex.y];
     }
 
     private void OnEnable()
