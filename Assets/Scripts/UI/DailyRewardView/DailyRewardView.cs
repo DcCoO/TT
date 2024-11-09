@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,7 +86,8 @@ public class DailyRewardView : View<DailyRewardView>
 
     private IEnumerator ProcessClaimSequence()
     {
-        var currentCoins = CoinsManager.Instance.Coins;
+        var initialCoinsAmount = CoinsManager.Instance.Coins;
+        var currentCoins = initialCoinsAmount;
         var currentReward = _dailyRewardFeature.DailyRewards[_currentStreak - 1].Value;
         var currentListItem = _claimListItems[_claimListItems.Count - _currentStreak];
         
@@ -97,10 +98,13 @@ public class DailyRewardView : View<DailyRewardView>
             var coin = _coinIconPool.GetCoin();
             coin.transform.position = currentListItem.GetPosition();
             coin.SetTarget(_coinsTarget);
-            UpdateCoinsLabel(currentCoins += (currentReward / 30));
+            currentCoins += (currentReward / 30);
+            UpdateCoinsLabel(currentCoins);
             
             yield return new WaitForSeconds(0.05f);
         }
+        
+        UpdateCoinsLabel(initialCoinsAmount + currentReward);
         
         yield return new WaitForSeconds(2f);
         
