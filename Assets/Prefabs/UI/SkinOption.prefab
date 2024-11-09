@@ -80,6 +80,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BrushParent: {fileID: 205908718667225189}
   m_Brush: {fileID: 7963347458615992490}
+  m_SelectParticles: {fileID: 4329134492652231553, guid: 4cadc60a8018d1b468d5ae476549f839,
+    type: 3}
+  m_ParticleScale: 0.091
 --- !u!54 &9096409006630816697
 Rigidbody:
   m_ObjectHideFlags: 0

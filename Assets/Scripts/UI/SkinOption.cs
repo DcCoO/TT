@@ -4,6 +4,8 @@ public class SkinOption : MonoBehaviour
 {
     [SerializeField] private Transform m_BrushParent;
     [SerializeField] private BrushMainMenu m_Brush;
+    [SerializeField] private ParticleSystem m_SelectParticles;
+    [SerializeField, Range(0, 0.5f)] private float m_ParticleScale;
     private SkinData m_SkinData;
     private SkinSelectView m_SkinSelectView;
     private Vector2Int m_SkinIndex;
@@ -30,6 +32,12 @@ public class SkinOption : MonoBehaviour
         if (Time.time - m_LastClickTime < m_ClickMaxDuration)
         {
             m_SkinSelectView.LoadPreview(m_SkinIndex);
+            var particle = Instantiate(m_SelectParticles, transform.position, Quaternion.identity);
+            particle.transform.localScale *= m_ParticleScale;
+            var main = particle.main;
+            main.startColor = m_SkinData.Color.m_Colors[0];
+            particle.Play();
+            Destroy(particle.gameObject, 5);
         }
     }
 }
