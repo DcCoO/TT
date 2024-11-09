@@ -28,6 +28,8 @@ public class DailyRewardManager : SingletonMB<DailyRewardManager>
     private void CheckDailyReward()
     {
         var lastLoginDate = PlayerPrefs.GetString(LastLoginDateKey, string.Empty);
+        
+        Debug.Log($"CheckDailyReward: {lastLoginDate}");
 
         if (DateTime.TryParse(lastLoginDate, out var lastLogin))
         {

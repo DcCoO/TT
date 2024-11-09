@@ -40,6 +40,7 @@ public class CoinsManager : SingletonMB<CoinsManager>
     public void AddCoins(int coins)
     {
         Coins += coins;
+        Debug.Log($"Adding {coins}, current coins: {Coins}");
         OnCoinsChangedEvent?.Invoke(this, new CoinsChangedEventArgs(Coins));
     }
     
