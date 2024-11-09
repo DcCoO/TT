@@ -21,8 +21,8 @@ public class MainMenuView : View<MainMenuView>
     public RankingView m_RankingView;
 
     [SerializeField] private Feature m_SkinSelectFeature;
-    [SerializeField] private GameObject m_SkinSelectPanel;
-    [SerializeField] private GameObject m_SkinSelectPanelNew;
+    [SerializeField] private GameObject[] m_SkinSelectObjectsOld;
+    [SerializeField] private GameObject[] m_SkinSelectObjectsNew;
 
     [Header("Ranks")]
     public string[] m_Ratings;
@@ -53,9 +53,11 @@ public class MainMenuView : View<MainMenuView>
     {
         if (featureType == m_SkinSelectFeature.FeatureType)
         {
-            print("TODO: FIX THIS");
-            //m_SkinSelectPanelNew.SetActive(state);
-            //m_SkinSelectPanel.SetActive(!state);
+            for (int i = 0; i < m_SkinSelectObjectsOld.Length; i++)
+                m_SkinSelectObjectsOld[i].SetActive(!state);
+
+            for (int i = 0; i < m_SkinSelectObjectsNew.Length; i++)
+                m_SkinSelectObjectsNew[i].SetActive(state);
         }
     }
 
