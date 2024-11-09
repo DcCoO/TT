@@ -28,12 +28,11 @@ public class DailyRewardManager : SingletonMB<DailyRewardManager>
     private void CheckDailyReward()
     {
         var lastLoginDate = PlayerPrefs.GetString(LastLoginDateKey, string.Empty);
-        
-        Debug.Log($"CheckDailyReward: {lastLoginDate}");
 
         if (DateTime.TryParse(lastLoginDate, out var lastLogin))
         {
             // If the last login date was before today, update the streak
+            print(lastLogin.Date + " " + DateTime.Now.Date);
             if (lastLogin.Date >= DateTime.Now.Date) return;
             
             // Reset the streak if the last login was before today
@@ -65,7 +64,7 @@ public class DailyRewardManager : SingletonMB<DailyRewardManager>
         CoinsManager.Instance.AddCoins(rewardAmount);
 
         //Update the persistent data
-        PlayerPrefs.SetString(LastLoginDateKey, DateTime.Now.ToString(CultureInfo.InvariantCulture));
+        PlayerPrefs.SetString(LastLoginDateKey, DateTime.Now.ToString(CultureInfo.CurrentCulture));
         PlayerPrefs.SetInt(StreakKey, _currentStreak);
         PlayerPrefs.Save();
     }
