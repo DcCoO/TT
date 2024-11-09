@@ -2,7 +2,7 @@
 using System.Globalization;
 using UnityEngine;
 
-public class DailyRewardManager : MonoBehaviour
+public class DailyRewardManager : SingletonMB<DailyRewardManager>
 {
     public static event EventHandler OnNewDailyStreakEvent;
     private const string LastLoginDateKey = "LastLoginDate";
@@ -60,6 +60,7 @@ public class DailyRewardManager : MonoBehaviour
         
         var rewardAmount = dailyClaimedEventArgs.RewardValue;
         Debug.Log($"Claimed {rewardAmount} amount of daily reward");
+        CoinsManager.Instance.AddCoins(rewardAmount);
 
         //Update the persistent data
         PlayerPrefs.SetString(LastLoginDateKey, DateTime.Now.ToString(CultureInfo.InvariantCulture));
@@ -73,7 +74,7 @@ public class DailyRewardManager : MonoBehaviour
         PlayerPrefs.DeleteKey(LastLoginDateKey);
         PlayerPrefs.DeleteKey(StreakKey);
         PlayerPrefs.Save();
-        Debug.Log("PlayerPrefs cleared.");
+        Debug.Log("DailyRewards PlayerPrefs cleared.");
     }
 
     [ContextMenu("Force New Daily Streak")]
