@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca57448139916471c8cd2921f0994aaf, type: 3}
   m_Name: Skin10
   m_EditorClassIdentifier: Assembly-CSharp::SkinDatas
-  Color: {fileID: 11400000, guid: f8a73bf7ef08540478d7e2d0702e0742, type: 2}
+  Color: {fileID: 11400000, guid: 00881ae6ae0514f08a3196d684dc103a, type: 2}
   Brush: {fileID: 11400000, guid: efeaa1ffb6e62475c9e04a0b60b7755e, type: 2}
