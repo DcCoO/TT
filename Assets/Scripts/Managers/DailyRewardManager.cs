@@ -8,6 +8,8 @@ public class DailyRewardManager : SingletonMB<DailyRewardManager>
     private const string LastLoginDateKey = "LastLoginDate";
     private const string StreakKey = "Streak";
     
+    [SerializeField] private DailyRewardFeature _dailyRewardFeature;
+    
     private int _currentStreak = 1;
 
     private void Awake()
@@ -27,10 +29,10 @@ public class DailyRewardManager : SingletonMB<DailyRewardManager>
 
     private void CheckDailyReward()
     {
+        if (!_dailyRewardFeature) return;
+        
         var lastLoginDate = PlayerPrefs.GetString(LastLoginDateKey, string.Empty);
         
-        Debug.Log($"CheckDailyReward: {lastLoginDate}");
-
         if (DateTime.TryParse(lastLoginDate, out var lastLogin))
         {
             // If the last login date was before today, update the streak

@@ -790,3 +790,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0952bfc32af04e548a93d38ff7421069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _dailyRewardFeature: {fileID: 11400000, guid: d96f8a19f246c914aa532e71e685997a,
+    type: 2}
